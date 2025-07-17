@@ -55,6 +55,6 @@ int	main(void)
 	printf("BSD STRLCPY\n");
 	char my_src2[] =						"Hello World !";
 	char my_dest2[sizeof(my_src2) + 6] =	"Hejadkjnhasldas";
-	ft_strlcpy(my_dest2, my_src2, sizeof(my_dest2));
+	strlcpy(my_dest2, my_src2, sizeof(my_dest2));
 	ft_putstr_non_printable(my_dest2, sizeof(my_dest2));
 }
