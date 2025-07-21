@@ -1,3 +1,4 @@
+#include "../utils/blocs.h"
 #include <stdio.h>
 
 char	*ft_strncat(char *dest, char *src, unsigned int nb);
@@ -8,6 +9,8 @@ char	*ft_strncat(char *dest, char *src, unsigned int nb);
 
 int	main()
 {
+	DESCRIPTION("ft_strncat", "Concatenate two strings until m bytes.");
+
 	char my_string[100] = "Hello";
 	MY_TEST(my_string, " World !", 5);
 

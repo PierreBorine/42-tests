@@ -1,3 +1,4 @@
+#include "../utils/blocs.h"
 #include <stdio.h>
 
 int	ft_strncmp(char *s1, char *s2, unsigned int n);
@@ -9,6 +10,8 @@ int	ft_strncmp(char *s1, char *s2, unsigned int n);
 
 int	main(void)
 {
+	DESCRIPTION("ft_strncmp", "Compare two strings and their ASCI code until n bytes");
+
 	MY_TEST("Hello", "Hello1", 5);
 	MY_TEST("Hello3", "Hello1", 6);
 	MY_TEST("Hello", "Hello", 6);

@@ -1,3 +1,4 @@
+#include "../utils/blocs.h"
 #include <stdio.h>
 
 char	*ft_strcat(char *dest, char *src);
@@ -8,6 +9,8 @@ char	*ft_strcat(char *dest, char *src);
 
 int	main()
 {
+	DESCRIPTION("ft_strcat", "Concatenate two strings");
+
 	char my_string[100] = "Hello";
 	MY_TEST(my_string, " World !");
 

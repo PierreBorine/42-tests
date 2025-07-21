@@ -1,3 +1,4 @@
+#include "../utils/blocs.h"
 #include <stdio.h>
 #include <string.h>
 
@@ -11,6 +12,8 @@ char	*ft_strstr(char *str, char *to_find);
 
 int	main(void)
 {
+	DESCRIPTION("ft_strstr", "Find a needle in a heystack.");
+
 	char my_stack[] = "Hello World !";
 	printf("STACK: \"%s\"", my_stack);
 
