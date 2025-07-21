@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
+
+SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE:-$0}")" &>/dev/null && pwd 2>/dev/null)"
+source $SCRIPT_DIR/../utils/blocs.sh
 exercice=$1
+
+DESCRIPTION "ft_print_program_name" "Print the executable's name."
 
 echo 'Test 1: "Hello World" "oooh mamaaa"'
 $exercice "Hello World" "oooh mamaaa"
