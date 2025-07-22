@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# ▄▀▀ █▀█ █▄░█ █▀ ▀█▀ ▄▀█ █▄░█ ▀█▀ █▀ #
+# ▀▄▄ █▄█ █░▀█ ▄█ ░█░ █▀█ █░▀█ ░█░ ▄█ #
+
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 ORANGE='\033[0;33m'
@@ -8,8 +11,17 @@ PURPLE='\033[0;35m'
 CYAN='\033[0;36m'
 NC='\033[39m'
 
-SCRIPT_PATH="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
+readonly SCRIPT_PATH="$(
+	cd -- "$(dirname "$0")" >/dev/null 2>&1
+	pwd -P
+)"
 
+readonly PROJ_PATH="$(pwd)"
+
+readonly compile_cmd="cc -lbsd -Wextra -Wall -Werror -g"
+
+# █▄▄ █░░ █▀█ ▄▀▀ █▀ #
+# █▄█ █▄▄ █▄█ ▀▄▄ ▄█ #
 gen_header() {
 	$SCRIPT_PATH/.bin/header-gen $@
 }
@@ -37,6 +49,14 @@ error() {
 	exit 1
 }
 
+running_header() {
+	echo
+	printf "${CYAN}"
+	gen_header "RUNNING: $1"
+	printf "${NC}"
+	echo
+}
+
 if [[ -z "$1" ]]; then
 	error "You need to give at least a project name to test. (ex: C02)"
 fi
@@ -53,65 +73,68 @@ gen_header "PROJECT: $project"
 #echo ◥
 printf "${NC}"
 
-
-if ! [[ "$project" =~ ^C[0-9]{2}$ ]]; then
+if ! [[ "$project" =~ ^C[0-9]{2}$ || "$project" =~ ^Rush[0-9]{2}$ ]]; then
 	error "Argument '$project' does not match any known project."
 fi
 if ! [[ -d "$SCRIPT_PATH/$project" ]]; then
 	error "No tests for '$project'."
 fi
-if [[ -z "$( ls -A $SCRIPT_PATH/$project )" ]]; then
+if [[ -z "$(ls -A $SCRIPT_PATH/$project)" ]]; then
 	error "No tests for '$project'."
 fi
 
-
-run_exercie() {
-	if ! [ -f "$SCRIPT_PATH/$project/$1.c" -o -f "$SCRIPT_PATH/$project/$1.sh" ]; then
-		soft_error "No tests for '$project/$1'."
-		return
-	fi
-
-	mkdir -p /tmp/tests_c_pf
-	echo
-	printf "${CYAN}"
-	gen_header "RUNNING: $1"
-	printf "${NC}"
-	echo
-
-	# Run the norminette
-	# if ! $(norminette ./$project/$1 -R CheckForbiddenSourceHeader); then
-	# 	failure "Norminette failed !"
-	# fi
-
+test_type1() {
 	test_file=""
 	if [ -f "$SCRIPT_PATH/$project/$1.c" ]; then
 		test_file="$SCRIPT_PATH/$project/$1.c"
 	fi
 
 	# compile with flags
-	cc -lbsd -Wextra -Wall -Werror \
+	$compile_cmd \
 		$test_file \
-		./$project/$1/*.c \
+		$PROJ_PATH/$project/$1/*.c \
 		-o /tmp/tests_c_pf/$1.o
+
+	echo Compiled binary: /tmp/tests_c_pf/$1.o
 
 	if [ -f "$SCRIPT_PATH/$project/$1.c" ]; then
 		/tmp/tests_c_pf/$1.o
 	elif [ -f "$SCRIPT_PATH/$project/$1.sh" ]; then
 		"$SCRIPT_PATH/$project/$1.sh" "/tmp/tests_c_pf/$1.o"
 	fi
-	
-	# else
-	# 	failure "Compilation failed !"
+}
+
+test_type2() {
+	"$SCRIPT_PATH/$project/$1/test.sh" "$PROJ_PATH/$project/$1" "$SCRIPT_PATH" "$compile_cmd"
+}
+
+run_exercie() {
+	mkdir -p /tmp/tests_c_pf
+
+	if [ -f "$SCRIPT_PATH/$project/$1.c" ]; then
+		running_header
+		test_type1 $1
+	# elif [ -f "$SCRIPT_PATH/$project/$1.sh" ]; then
+	elif [ -d "$SCRIPT_PATH/$project/$1" ]; then
+		running_header
+		test_type2 $1
+	else
+		soft_error "No tests for '$project/$1'."
+		return
+	fi
+
+	# Run the norminette
+	# if ! $(norminette $PROJ_PATH/$project/$1 -R CheckForbiddenSourceHeader); then
+	# 	failure "Norminette failed !"
 	# fi
 }
 
 run_all() {
-	for ex_dir in ./$project/*/; do
+	for ex_dir in $PROJ_PATH/$project/*/; do
 		ex_dir=$(basename $ex_dir)
 		run_exercie $ex_dir
 	done
 }
-
 
 # Case 1: No exercise is precised, running all
 if [ -z "$2" ]; then
@@ -123,7 +146,7 @@ if [ -z "$2" ]; then
 # Case 2: An exercise is precised, running it only
 else
 	exercice=$2
-	if ! [[ "$exercice" =~ ^ex[0-9]{2}$ ]]; then
+	if ! [[ "$exercice" =~ ^ex[0-9]{2}(-b)?$ ]]; then
 		error "Argument '$exercice' does not match any known exercice."
 	fi
 	run_exercie $exercice
