@@ -1,10 +1,13 @@
 #include <stdio.h>
 #include <string.h>
+#include "../utils/blocs.h"
 
 char	*ft_strcpy(char *dest, char *src);
 
 int	main(void)
 {
+	DESCRIPTION("ft_strcpy", "Copy a string to a destination string.");
+
 	// my strcpy
 	char my_string[] =					"Hello World !";
 	char dest_str[sizeof(my_string) + 4] =	"oh";

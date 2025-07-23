@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include "../utils/blocs.h"
 
 int	ft_str_is_printable(char *str);
 
@@ -7,6 +8,8 @@ int	ft_str_is_printable(char *str);
 
 int	main(void)
 {
+	DESCRIPTION("ft_str_is_printable", "Is the string composed only of printable characters.");
+
 	MY_TEST("Hello World !");
 	MY_TEST("Hello\nWorld !");
 	MY_TEST("");

@@ -2,6 +2,7 @@
 #include <stdio.h>
 // Must compile with '-lbsd'
 #include <bsd/string.h>
+#include "../utils/blocs.h"
 
 unsigned int	ft_strlcpy(char *dest, char *src, unsigned int size);
 
@@ -44,6 +45,8 @@ void	ft_putstr_non_printable(char *str, unsigned size)
 
 int	main(void)
 {
+	DESCRIPTION("ft_strlcpy", "help");
+
 	printf("FT_STRLCPY\n");
 	char my_src[] = "Hello World !";
 	char my_dest[sizeof(my_src) + 6];

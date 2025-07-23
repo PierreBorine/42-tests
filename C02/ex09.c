@@ -1,9 +1,12 @@
 #include <stdio.h>
+#include "../utils/blocs.h"
 
 char	*ft_strcapitalize(char *str);
 
 int	main(void)
 {
+	DESCRIPTION("ft_strcapitalize", "Change the first character of every words in a string.");
+
 	char	my_string[] =
 		"hi, hOw are you? 42words foRty-two; fifty+and+one 4 A a";
 	printf("BEFORE: %s\n", my_string);
