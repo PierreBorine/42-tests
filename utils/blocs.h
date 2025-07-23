@@ -21,4 +21,8 @@ void	DESCRIPTION(char *name, char *desc) {
 	printf(BG_PURPLE " %s " DEFAULT ": " PINK "%s" DEFAULT "\n\n", name, desc);
 }
 
+void	HEADER(char *header) {
+	printf("\n🔧 " BOLD "%s" DEFAULT "\n", header);
+}
+
 #endif
