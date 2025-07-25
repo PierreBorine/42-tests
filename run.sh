@@ -3,20 +3,15 @@
 # ▄▀▀ █▀█ █▄░█ █▀ ▀█▀ ▄▀█ █▄░█ ▀█▀ █▀ #
 # ▀▄▄ █▄█ █░▀█ ▄█ ░█░ █▀█ █░▀█ ░█░ ▄█ #
 
-RED='\033[0;31m'
-GREEN='\033[0;32m'
-ORANGE='\033[0;33m'
-BLUE='\033[0;34m'
-PURPLE='\033[0;35m'
-CYAN='\033[0;36m'
-NC='\033[39m'
+readonly PROJ_PATH="$(pwd)"
 
 readonly SCRIPT_PATH="$(
 	cd -- "$(dirname "$0")" >/dev/null 2>&1
 	pwd -P
 )"
 
-readonly PROJ_PATH="$(pwd)"
+source $SCRIPT_PATH/utils/blocs.sh
+
 
 readonly compile_cmd="cc -lbsd -Wextra -Wall -Werror -g"
 
@@ -95,7 +90,7 @@ test_type1() {
 		$PROJ_PATH/$project/$1/*.c \
 		-o /tmp/tests_c_pf/$1.o
 
-	echo Compiled binary: /tmp/tests_c_pf/$1.o
+	EXE "/tmp/tests_c_pf/$1.o"
 
 	if [ -f "$SCRIPT_PATH/$project/$1.c" ]; then
 		/tmp/tests_c_pf/$1.o
@@ -112,11 +107,11 @@ run_exercie() {
 	mkdir -p /tmp/tests_c_pf
 
 	if [ -f "$SCRIPT_PATH/$project/$1.c" ]; then
-		running_header
+		running_header $1
 		test_type1 $1
 	# elif [ -f "$SCRIPT_PATH/$project/$1.sh" ]; then
 	elif [ -d "$SCRIPT_PATH/$project/$1" ]; then
-		running_header
+		running_header $1
 		test_type2 $1
 	else
 		soft_error "No tests for '$project/$1'."
