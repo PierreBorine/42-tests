@@ -8,7 +8,7 @@ void	MY_TEST(char *charset, char *str)
 {
 	char **splits = ft_split(str, charset);
 	for (int i=0;splits[i] != NULL;i++) {
-		printf("SPLIT %d: %s\n", i, splits[i]);
+		printf("SPLIT %d: %s\n", i+1, splits[i]);
 	}
 }
 
@@ -27,4 +27,7 @@ int	main(void)
 
 	HEADER("Testing empty string with empty charset.");
 	MY_TEST("", "");
+
+	HEADER("Testing with separator at the start and end.");
+	MY_TEST("b", "bHellob");
 }
