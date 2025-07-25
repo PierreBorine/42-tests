@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include "../utils/blocs.h"
 
 int	ft_iterative_factorial(int nb);
 
@@ -8,6 +9,8 @@ int	ft_iterative_factorial(int nb);
 
 int	main(void)
 {
+	DESCRIPTION("ft_iterative_factorial", "Use a normal loop to calculate a factorial.");
+
 	MY_TEST(0, "1");
 	MY_TEST(1, "1");
 	MY_TEST(2, "2");

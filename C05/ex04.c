@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include "../utils/blocs.h"
 
 int	ft_fibonacci(int index);
 
@@ -8,6 +9,8 @@ int	ft_fibonacci(int index);
 
 int	main(void)
 {
+	DESCRIPTION("ft_fibonacci", "Find the xth element of the Fibonacci sequence");
+
 	MY_TEST(0, "0");
 	MY_TEST(0, "0");
 	MY_TEST(1, "1");

@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include "../utils/blocs.h"
 #include <limits.h>
 
 int	ft_is_prime(int nb);
@@ -9,6 +10,8 @@ int	ft_is_prime(int nb);
 
 int	main(void)
 {
+	DESCRIPTION("ft_is_prime", "Determine if a given int is prime.");
+
 	MY_TEST(0, "0");
 	MY_TEST(1, "0");
 	MY_TEST(2, "1");

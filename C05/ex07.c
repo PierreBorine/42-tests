@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include "../utils/blocs.h"
 #include <limits.h>
 
 int	ft_find_next_prime(int nb);
@@ -9,6 +10,8 @@ int	ft_find_next_prime(int nb);
 
 int	main(void)
 {
+	DESCRIPTION("ft_find_next_prime", "Find the next prime number, starting from the given int.");
+
 	MY_TEST(0, "2");
 	MY_TEST(1, "2");
 	MY_TEST(2, "2");

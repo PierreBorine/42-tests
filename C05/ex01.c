@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include "../utils/blocs.h"
 
 int	ft_recursive_factorial(int nb);
 
@@ -8,6 +9,8 @@ int	ft_recursive_factorial(int nb);
 
 int	main(void)
 {
+	DESCRIPTION("ft_recursive_factorial", "Use a recursive function to calculate a factorial.");
+
 	MY_TEST(0, "1");
 	MY_TEST(1, "1");
 	MY_TEST(2, "2");
