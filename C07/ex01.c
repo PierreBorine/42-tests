@@ -4,7 +4,7 @@
 int *ft_range(int min, int max);
 
 #define MY_TEST(MIN, MAX) { \
-	printf("MIN(%d), MAX(%d):\t", MIN, MAX); \
+	printf("ft_range(%d, %d):\t", MIN, MAX); \
 	int *my_range = ft_range(MIN, MAX); \
 	for (int i=0;i< MAX - MIN;i++) { \
 		printf("%d, ", my_range[i]); \

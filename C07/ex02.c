@@ -4,7 +4,7 @@
 int ft_ultimate_range(int **range, int min, int max);
 
 #define MY_TEST(RANGE, MIN, MAX) { \
-	printf("MIN(%d), MAX(%d): Return code: %d\n", \
+	printf("ft_ultimate_range(%d, %d): Return len: %d\n", \
 		ft_ultimate_range(RANGE, MIN, MAX), MIN, MAX); \
 	for (int i=0;i<MAX-MIN;i++) { \
 		printf("%d, ", *RANGE[i]); \
